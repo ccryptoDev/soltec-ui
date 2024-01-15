@@ -1,0 +1,60 @@
+import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+
+@Component({
+  selector: 'app-custom-input',
+  templateUrl: './custom-input.component.html',
+  styleUrls: ['./custom-input.component.scss'],
+})
+export class CustomInputComponent implements AfterViewInit{
+  @Input() label: string = '';
+  @Input() type: string = 'text';
+  @Input() name: string = '';
+  @Input() value: string = '';
+  @Input() error: boolean = false;
+  @Output() valueChange = new EventEmitter<string>();
+  @Output() focus = new EventEmitter<void>();
+  @Output() blur = new EventEmitter<void>();
+
+  showPassword: boolean = true;
+  @ViewChild('inputField') inputField!: ElementRef;
+  @ViewChild('placeholderLabel') placeholderLabel!: ElementRef;
+
+  ngAfterViewInit() {
+    this.updatePlaceholderCoverWidth();
+  }
+
+  constructor(private el: ElementRef) {}
+
+  onInputFocus() {
+    const placeholder = this.el.nativeElement.querySelector('.placeholder');
+    placeholder?.classList.add('active');
+    this.updatePlaceholderCoverWidth();
+  }
+
+  onInputBlur() {
+    const placeholder = this.el.nativeElement.querySelector('.placeholder');
+    if (!this.value) {
+      placeholder?.classList.remove('active');
+      this.inputField?.nativeElement.classList.remove('existLetter');
+    } else {
+      if (!this.inputField.nativeElement.classList.contains('existLetter')) {
+        this.inputField.nativeElement.classList.add('existLetter');
+      }
+    }
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+    this.type = this.showPassword ? 'password' : 'text';
+  }
+
+  updatePlaceholderCoverWidth() {
+    const inputWidth = this.inputField.nativeElement.offsetWidth;
+    const labelWidth = this.placeholderLabel.nativeElement.offsetWidth;
+    const placeholderCoverWidth = inputWidth - labelWidth - 18;
+    const placeholderCover = this.el.nativeElement.querySelector('.placeholder-cover');
+    if (placeholderCover) {
+      placeholderCover.style.width = `${placeholderCoverWidth}px`;
+    }
+  }
+}

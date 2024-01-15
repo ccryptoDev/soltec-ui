@@ -1,0 +1,18 @@
+<div class="input-container">
+  <input
+    class="input-field"
+    [class.error]="error"
+    [attr.name]="name"
+    [type]="type"
+    placeholder=""
+    [(ngModel)]="value"
+    (focus)="onInputFocus()"
+    (blur)="onInputBlur()"
+    #inputField
+  />
+  <label class="placeholder" [class.active]="value" #placeholderLabel>{{ label }}</label>
+  <div *ngIf="name === 'password'" class="password-toggle" (click)="togglePasswordVisibility()">
+    <mat-icon>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+  </div>
+  <div class="placeholder-cover"></div>
+</div>

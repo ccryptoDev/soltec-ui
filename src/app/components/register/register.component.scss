@@ -1,0 +1,19 @@
+@import 'src/styles.scss';
+@import 'src/styles/_variables.scss';
+@import 'src/styles/auth.scss';
+
+.register-form {
+  width: 590px;
+  height: 643px;
+
+  .inner {
+    width: 100%;
+    margin: auto;
+    max-width: 460px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+}

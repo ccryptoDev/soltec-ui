@@ -1,0 +1,44 @@
+
+<div class="auth-container">
+  <div class="login-form auth-form">
+    <div class="inner">
+      <div class="logo-title mb-5">
+        <img src="assets/images/logo.png" alt="Soltec Logo">
+      </div>
+
+      <form (ngSubmit)="login()">
+        <div class="mb-4">
+          <app-custom-input
+            label="email"
+            name="email"
+            type="text"
+            [(value)]="email"
+            [error]="emailRequired"
+          ></app-custom-input>
+          <div *ngIf="emailFormatError" class="err-massage">El formato del correo electrónico no es válido</div>
+        </div>
+
+        <app-custom-input
+          label="Contraseña"
+          name="password"
+          type="password"
+          [(value)]="password"
+          [error]="passwordRequired"
+        ></app-custom-input>
+
+        <button class="btn-auth mt-3" type="submit">INICIAR SESIÓN</button>
+
+        <p class="forgot-password mb-4 mt-4" (click)="redirectToForgotPassword()">¿Has olvidado tu contraseña?</p>
+
+        <button class="btn-social" type="button" (click)="social_login()">
+          <img src="assets/images/microsoft.png">
+          <span>Sign in with Microsoft</span>
+        </button>
+
+        <div class="auth-link">
+          ¿Todavía no tienes cuenta? <p (click)="redirectToSignup()">Regístrate aquí.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

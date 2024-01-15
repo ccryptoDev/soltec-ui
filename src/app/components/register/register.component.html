@@ -1,0 +1,62 @@
+
+<div class="auth-container">
+  <div class="register-form auth-form">
+    <div class="inner">
+      <div class="logo-title mb-5">
+        <img src="assets/images/logo.png" alt="Soltec Logo">
+      </div>
+
+      <div class="mb-4">
+        <app-custom-input
+          label="Nombre(s)"
+          name="firstName"
+          type="text"
+          [(value)]="firstName">
+        </app-custom-input>
+      </div>
+
+      <div class="mb-4">
+        <app-custom-input
+          label="Apellido(s)"
+          name="lastName"
+          type="text"
+          [(value)]="lastName">
+        </app-custom-input>
+      </div>
+
+      <div class="mb-4">
+        <app-custom-input
+          label="Email"
+          name="email"
+          type="email"
+          [(value)]="email">
+        </app-custom-input>
+      </div>
+
+      <div class="mb-4">
+        <app-custom-input
+          label="Contaseña"
+          name="password"
+          type="password"
+          [(value)]="password">
+        </app-custom-input>
+      </div>
+
+      <div class="mb-4">
+        <app-custom-input
+          label="Repetir Contaseña"
+          name="confirmPassword"
+          type="password"
+          [(value)]="confirmPassword">
+        </app-custom-input>
+      </div>
+
+      <button class="btn-auth" (click)="register()">REGISTRARME</button>
+
+      <div class="auth-link mt-3">
+        ¿Ya tienes cuenta? <p (click)="redirectToLogin()">Ingresar</p>
+      </div>
+    </div>
+  </div>
+</div>
+
