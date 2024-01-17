@@ -3,7 +3,7 @@
   <div *ngIf="!registerSuccess; else successForm" class="register-form auth-form">
     <div class="inner mt-40 mb-40">
       <div class="logo-title mb-5">
-        <img src="assets/images/logo.png" alt="Soltec Logo">
+        <img class="w100" src="assets/images/logo.png" alt="Soltec Logo">
       </div>
 
       <div class="form-field mb-20">
@@ -90,15 +90,15 @@
     </div>
   </div>
   <ng-template #successForm>
-    <div class="success-form">
+    <div class="success-form auth-form other-shadow">
       <div class="inner mt-40 mb-40">
         <div class="logo-title">
-          <img src="assets/images/logo.png" alt="Soltec Logo">
+          <img class="w120" src="assets/images/logo.png" alt="Soltec Logo">
         </div>
         <div class="success-msg">
           Tu cuenta ha sido creada exitosamente. Ahora puedes entrar y utilizar la plataforma.
         </div>
-        <button class="btn-auth btn-success" (click)="redirectToLogin()">IR A INGRESAR</button>
+        <button class="btn-auth" (click)="redirectToLogin()">IR A INGRESAR</button>
       </div>
     </div>
   </ng-template>

@@ -12,8 +12,14 @@
     border: 1px solid $border;
     padding: 13px 14px;
     border-radius: 6px;
-    font-size: 16px;
-    letter-spacing: 0.5px;
+
+
+    &.regular-text {
+      color: $secondary-color;
+      font-size: 16px;
+      line-height: 20px;
+      letter-spacing: 0.5px;
+    }
 
     &:focus, &.existLetter {
       outline: none;
@@ -45,10 +51,6 @@
     &.error.existLetter.ng-touched {
       border-top: none;
     }
-
-    // &.error + .placeholder {
-    //   color: $error-color;
-    // }
 
     &.error.ng-touched ~ .placeholder-cover {
       background-color: $error-color;
