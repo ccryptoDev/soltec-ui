@@ -1,19 +1,38 @@
 @import 'src/styles.scss';
 @import 'src/styles/_variables.scss';
 @import 'src/styles/auth.scss';
+@import 'src/styles/constants.scss';
 
 .register-form {
   width: 590px;
-  height: 643px;
 
   .inner {
     width: 100%;
-    margin: auto;
     max-width: 460px;
-  }
 
-  form {
-    display: flex;
-    flex-direction: column;
+    .form-field {
+
+      .password-validation {
+        .validation-item {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+
+          img {
+            width: auto;
+          }
+
+          span {
+            color: $secondary-color;
+            line-height: 17px;
+            font-size: 14px;
+          }
+
+          &.checked span {
+            color: #72DF1C;
+          }
+        }
+      }
+    }
   }
 }

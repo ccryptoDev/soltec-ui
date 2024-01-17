@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import {AuthValidation} from '../../utils/auth-validation';
 
 @Component({
@@ -19,7 +20,19 @@ export class LoginComponent implements AfterViewInit {
   serverError: boolean = false;
   credentialError: boolean = false;
 
-  constructor(private router: Router, private el: ElementRef) {}
+  errorType: string | null = null;
+  errorMsg: { [key: string]: { title: string; desc: string } } = {
+    'serverErr': {
+      'title': 'Error de servidor.',
+      'desc': 'Problema al conectar al servidor. Intenta más tarde.'
+    },
+    'credentialErr': {
+      'title': 'Las credenciales son incorrectas.',
+      'desc': 'Por favor, revisa las credenciales ingresadas.'
+    }
+  };
+
+  constructor(private authService: AuthService, private router: Router, private el: ElementRef) {}
 
   ngAfterViewInit() {
 
@@ -28,18 +41,20 @@ export class LoginComponent implements AfterViewInit {
   login() {
     this.emailRequired = this.email.trim() === '';
     this.passwordRequired = this.password.trim() === '';
-    // Validation for required
-    if (this.emailRequired || this.passwordRequired) {
-      return;
-    }
 
     // Validation for email format
     this.emailFormatError = AuthValidation.validateEmail(this.email) === false;
-    if (!this.emailFormatError) {
-      return;
-    }
 
     if (!this.emailRequired && !this.passwordRequired) {
+      this.authService.login(this.email, this.password).subscribe(
+        (response) => {
+          const userData = response.body;
+          localStorage.setItem('token', userData.token);
+        },
+        (error) => {
+          // handle the errors by response.status
+        }
+      );
       this.router.navigate(['/projects']);
     }
   }

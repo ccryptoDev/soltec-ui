@@ -62,3 +62,44 @@
     }
   }
 }
+
+.err-notif {
+  color: $error-color;
+}
+
+.err-message {
+  display: flex;
+  flex-direction: column;
+  padding: 13px 16px;
+  color: #333333;
+  background: $error-msg-background;
+  border-radius: 6px;
+  margin: 10px 0;
+  gap: 3px;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  img {
+    width: 18px;
+  }
+
+  h2 {
+    font-family: 'Calibri-bold';
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0;
+  }
+
+  p {
+    font-family: 'Calibri-regular';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    margin: 0;
+  }
+}

@@ -14,6 +14,7 @@ export class CustomInputComponent implements AfterViewInit{
   @Output() valueChange = new EventEmitter<string>();
   @Output() focus = new EventEmitter<void>();
   @Output() blur = new EventEmitter<void>();
+  @Output() passwordChange = new EventEmitter<string>();
 
   showPassword: boolean = true;
   @ViewChild('inputField') inputField!: ElementRef;
@@ -55,6 +56,14 @@ export class CustomInputComponent implements AfterViewInit{
     const placeholderCover = this.el.nativeElement.querySelector('.placeholder-cover');
     if (placeholderCover) {
       placeholderCover.style.width = `${placeholderCoverWidth}px`;
+    }
+  }
+
+  onInputChange(value: string) {
+    this.valueChange.emit(value);
+
+    if (this.type === 'password') {
+      this.passwordChange.emit(value);
     }
   }
 }

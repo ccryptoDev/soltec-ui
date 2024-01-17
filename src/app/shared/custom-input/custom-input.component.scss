@@ -8,7 +8,7 @@
   .input-field {
     position: relative;
     width: 100%;
-    height: 50px;
+    height: 56px;
     border: 1px solid $border;
     padding: 13px 14px;
     border-radius: 6px;
@@ -54,6 +54,13 @@
       background-color: $error-color;
       height: 1px;
       z-index: 2;
+    }
+
+    &:-internal-autofill-selected {
+      appearance: menulist-button;
+      background-image: none !important;
+      background-color: transparent !important;
+      color: fieldtext !important;
     }
   }
 

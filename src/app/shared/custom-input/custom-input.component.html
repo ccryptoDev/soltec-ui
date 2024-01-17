@@ -6,6 +6,7 @@
     [type]="type"
     placeholder=""
     [(ngModel)]="value"
+    (ngModelChange)="onInputChange($event)"
     (focus)="onInputFocus()"
     (blur)="onInputBlur()"
     #inputField

@@ -1,57 +1,77 @@
 
 <div class="auth-container">
   <div class="register-form auth-form">
-    <div class="inner">
+    <div class="inner mt-40 mb-40">
       <div class="logo-title mb-5">
         <img src="assets/images/logo.png" alt="Soltec Logo">
       </div>
 
-      <div class="mb-4">
+      <div class="form-field mb-20">
         <app-custom-input
           label="Nombre(s)"
           name="firstName"
           type="text"
-          [(value)]="firstName">
-        </app-custom-input>
+          [(value)]="firstName"
+          [error]="firstnameRequired"
+        ></app-custom-input>
       </div>
 
-      <div class="mb-4">
+      <div class="form-field mb-20">
         <app-custom-input
           label="Apellido(s)"
           name="lastName"
           type="text"
-          [(value)]="lastName">
-        </app-custom-input>
+          [(value)]="lastName"
+          [error]="lastnameRequired"
+        ></app-custom-input>
       </div>
 
-      <div class="mb-4">
+      <div class="form-field email-field mb-20" [class.mb-0]="!emailRequired && emailFormatError">
         <app-custom-input
           label="Email"
           name="email"
           type="email"
-          [(value)]="email">
-        </app-custom-input>
+          [(value)]="email"
+          [error]="emailRequired || emailFormatError"
+        ></app-custom-input>
+        <div *ngIf="!emailRequired && emailFormatError" class="err-notif" [class.mt-10]="emailFormatError">El formato del correo electrónico no es válido</div>
       </div>
 
-      <div class="mb-4">
+      <div class="form-field password-field" [class.mb-20]="!password" [class.mt-10]="!emailRequired && emailFormatError">
         <app-custom-input
           label="Contaseña"
           name="password"
           type="password"
-          [(value)]="password">
-        </app-custom-input>
+          [(value)]="password"
+          (passwordChange)="updatePasswordValidation()"
+          [error]="passwordRequired || passwordFormatError"
+        ></app-custom-input>
+        <div *ngIf="password" class="password-validation mt-10">
+          <div class="validation-item" [class.checked]="passwordValidation.upperAndlowcase">
+            <img [src]="passwordValidation.upperAndlowcase ? 'assets/images/checked.png' : 'assets/images/minus.png'">
+            <span>Incluir minúsculas y mayúsculas.</span>
+          </div>
+          <div class="validation-item" [class.checked]="passwordValidation.numberOrSymbol">
+            <img [src]="passwordValidation.numberOrSymbol ? 'assets/images/checked.png' : 'assets/images/minus.png'">
+            <span>Incluir al menos un número o símbolo.</span>
+          </div>
+          <div class="validation-item" [class.checked]="passwordValidation.minLength">
+            <img [src]="passwordValidation.minLength ? 'assets/images/checked.png' : 'assets/images/minus.png'">
+            <span>Tener al menos 10 caracteres.</span>
+          </div>
+        </div>
       </div>
 
-      <div class="mb-4">
-        <app-custom-input
-          label="Repetir Contaseña"
-          name="confirmPassword"
-          type="password"
-          [(value)]="confirmPassword">
-        </app-custom-input>
+      <!-- error notification -->
+      <div *ngIf="errorType && errorMsg[errorType]" class="err-message">
+        <div>
+          <img src="assets/images/error-icon.png">
+          <h2>{{ errorMsg[errorType].title }}</h2>
+        </div>
+        <p>{{ errorMsg[errorType].desc }}</p>
       </div>
 
-      <button class="btn-auth" (click)="register()">REGISTRARME</button>
+      <button class="btn-auth mt-10" (click)="register()">REGISTRARME</button>
 
       <div class="auth-link mt-3">
         ¿Ya tienes cuenta? <p (click)="redirectToLogin()">Ingresar</p>
