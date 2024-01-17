@@ -12,14 +12,16 @@ export class LoginComponent implements AfterViewInit {
   email: string = '';
   password: string = '';
 
-  emailRequired: boolean = false;
-  passwordRequired: boolean = false;
+  // validation
+  emailRequired: boolean = true;
+  passwordRequired: boolean = true;
+  emailFormatError: boolean = true;
 
-  emailFormatError: boolean = false;
-
+  // error codes
   serverError: boolean = false;
   credentialError: boolean = false;
 
+  // error type and messages
   errorType: string | null = null;
   errorMsg: { [key: string]: { title: string; desc: string } } = {
     'serverErr': {
@@ -39,12 +41,6 @@ export class LoginComponent implements AfterViewInit {
   }
 
   login() {
-    this.emailRequired = this.email.trim() === '';
-    this.passwordRequired = this.password.trim() === '';
-
-    // Validation for email format
-    this.emailFormatError = AuthValidation.validateEmail(this.email) === false;
-
     if (!this.emailRequired && !this.emailFormatError && !this.passwordRequired) {
       this.authService.login(this.email, this.password).subscribe(
         (response) => {
@@ -59,6 +55,15 @@ export class LoginComponent implements AfterViewInit {
     }
   }
 
+  updateEmailValidation() {
+    this.emailRequired = this.email.trim() === '';
+    this.emailFormatError = AuthValidation.validateEmail(this.email) === false;
+  }
+
+  updatePasswordValidation() {
+    this.passwordRequired = this.password.trim() === '';
+  }
+
   redirectToForgotPassword() {
     this.router.navigate(['/forgot-password']);
   }
@@ -69,9 +74,5 @@ export class LoginComponent implements AfterViewInit {
 
   social_login() {
     alert('social login');
-  }
-
-  emailFormatValidation(email: string) {
-
   }
 }

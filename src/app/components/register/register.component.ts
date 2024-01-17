@@ -9,20 +9,21 @@ import {AuthValidation} from '../../utils/auth-validation';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+
   registerSuccess: boolean = false;
+
   firstName: string = '';
   lastName: string = '';
   email: string = '';
   password: string = '';
 
-  firstnameRequired: boolean = false;
-  lastnameRequired: boolean = false;
+  firstnameRequired: boolean = true;
+  lastnameRequired: boolean = true;
+  emailRequired: boolean = true;
+  passwordRequired: boolean = true;
 
-  emailRequired: boolean = false;
-  emailFormatError: boolean = false;
-
-  passwordRequired: boolean = false;
-  passwordFormatError: boolean = false;
+  emailFormatError: boolean = true;
+  passwordFormatError: boolean = true;
 
   passwordValidation: {
     upperAndlowcase: boolean,
@@ -49,15 +50,6 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   register() {
-    this.firstnameRequired = this.firstName.trim() === '';
-    this.lastnameRequired = this.lastName.trim() === '';
-
-    this.emailRequired = this.email.trim() === '';
-    this.emailFormatError = AuthValidation.validateEmail(this.email) === false;
-
-    this.passwordRequired = this.password.trim() === '';
-    this.passwordFormatError = !Object.values(this.passwordValidation).every(value => value);
-
     if (!this.firstnameRequired && !this.lastnameRequired && !this.emailFormatError && !this.passwordFormatError) {
       const user = {
         'firstName': this.firstName,
@@ -77,11 +69,28 @@ export class RegisterComponent {
     }
   }
 
+  updateFirstnameValidation() {
+    this.firstnameRequired = this.firstName.trim() === '';
+  }
+
+  updateLastnameValidation() {
+    this.lastnameRequired = this.lastName.trim() === '';
+  }
+
+  updateEmailValidation() {
+    this.emailRequired = this.email.trim() === '';
+    this.emailFormatError = AuthValidation.validateEmail(this.email) === false;
+  }
+
   updatePasswordValidation() {
+    this.passwordRequired = this.password.trim() === '';
     this.passwordValidation.upperAndlowcase = AuthValidation.validatePassword(this.password, 1);
     this.passwordValidation.numberOrSymbol = AuthValidation.validatePassword(this.password, 2);
-    this.passwordValidation.minLength = AuthValidation.validatePassword(this.password, 3);;
+    this.passwordValidation.minLength = AuthValidation.validatePassword(this.password, 3);
+    this.passwordFormatError = !Object.values(this.passwordValidation).every(value => value);
   }
+
+
 
   redirectToLogin() {
     this.router.navigate(['/login']);

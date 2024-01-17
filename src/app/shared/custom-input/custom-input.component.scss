@@ -32,17 +32,17 @@
       z-index: 2;
     }
 
-    &.error {
+    &.error.ng-touched {
       border: 1px solid $error-color;
       color: $error-color;
     }
 
-    &:focus.error {
+    &:focus.error.ng-touched {
       border: 1px sold $error-color;
       border-top: none;
     }
 
-    &.error.existLetter {
+    &.error.existLetter.ng-touched {
       border-top: none;
     }
 
@@ -50,7 +50,7 @@
     //   color: $error-color;
     // }
 
-    &.error ~ .placeholder-cover {
+    &.error.ng-touched ~ .placeholder-cover {
       background-color: $error-color;
       height: 1px;
       z-index: 2;

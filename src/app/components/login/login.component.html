@@ -13,6 +13,7 @@
             name="email"
             type="text"
             [(value)]="email"
+            (emailChange)="updateEmailValidation()"
             [error]="emailRequired || emailFormatError"
           ></app-custom-input>
           <div *ngIf="!emailRequired && emailFormatError" class="err-notif" [class.mt-10]="emailFormatError">
@@ -26,11 +27,18 @@
             name="password"
             type="password"
             [(value)]="password"
+            (passwordChange)="updatePasswordValidation()"
             [error]="passwordRequired"
           ></app-custom-input>
         </div>
 
-        <button class="btn-auth mt-3" type="submit">INICIAR SESIÓN</button>
+        <button
+          class="btn-auth mt-3"
+          [class.disabled]="emailRequired || emailFormatError || passwordRequired"
+          type="submit"
+        >
+          INICIAR SESIÓN
+        </button>
 
         <div *ngIf="errorType && errorMsg[errorType]" class="err-message">
           <div>

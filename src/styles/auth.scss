@@ -29,7 +29,7 @@
 .btn-auth {
   width: 100%;
   height: 50px;
-  background-color: $btn-auth-color;
+  background: $btn-auth-activated;
   color: $white;
   border: none;
   border-radius: 6px;
@@ -38,8 +38,13 @@
   font-size: 12px;
   font-family: 'Calibri bold';
 
-  &:hover {
-    background: $btn-auth-hover-color;
+  &.disabled {
+    background: $btn-auth-disabled;
+    cursor: not-allowed;
+  }
+
+  &:not(.disabled):hover {
+    opacity: 0.5;
     transition: width 1s ease;
   }
 }

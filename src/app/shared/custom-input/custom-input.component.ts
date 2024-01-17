@@ -15,6 +15,9 @@ export class CustomInputComponent implements AfterViewInit{
   @Output() focus = new EventEmitter<void>();
   @Output() blur = new EventEmitter<void>();
   @Output() passwordChange = new EventEmitter<string>();
+  @Output() emailChange = new EventEmitter<string>();
+  @Output() firstnameChange = new EventEmitter<string>();
+  @Output() lastnameChange = new EventEmitter<string>();
 
   showPassword: boolean = true;
   @ViewChild('inputField') inputField!: ElementRef;
@@ -64,6 +67,12 @@ export class CustomInputComponent implements AfterViewInit{
 
     if (this.type === 'password') {
       this.passwordChange.emit(value);
+    } else if (this.name == 'email') {
+      this.emailChange.emit(value);
+    } else if (this.name == 'firstname') {
+      this.firstnameChange.emit(value);
+    } else if (this.name == 'lastname') {
+      this.lastnameChange.emit(value);
     }
   }
 }
