@@ -9,7 +9,7 @@
       <div class="form-field mb-20">
         <app-custom-input
           label="Nombre(s)"
-          name="firstName"
+          name="firstname"
           type="text"
           [(value)]="firstName"
           (firstnameChange)="updateFirstnameValidation()"
@@ -20,7 +20,7 @@
       <div class="form-field mb-20">
         <app-custom-input
           label="Apellido(s)"
-          name="lastName"
+          name="lastname"
           type="text"
           [(value)]="lastName"
           (lastnameChange)="updateLastnameValidation()"
@@ -40,7 +40,7 @@
         <div *ngIf="!emailRequired && emailFormatError" class="err-notif" [class.mt-10]="emailFormatError">El formato del correo electrónico no es válido</div>
       </div>
 
-      <div class="form-field password-field" [class.mb-20]="!password" [class.mt-10]="!emailRequired && emailFormatError">
+      <div class="form-field password-field" [class.mb-20]="!password" [class.mt-15]="!emailRequired && emailFormatError">
         <app-custom-input
           label="Contaseña"
           name="password"
