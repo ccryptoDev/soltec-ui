@@ -45,7 +45,7 @@ export class LoginComponent implements AfterViewInit {
     // Validation for email format
     this.emailFormatError = AuthValidation.validateEmail(this.email) === false;
 
-    if (!this.emailRequired && !this.passwordRequired) {
+    if (!this.emailRequired && !this.emailFormatError && !this.passwordRequired) {
       this.authService.login(this.email, this.password).subscribe(
         (response) => {
           const userData = response.body;
