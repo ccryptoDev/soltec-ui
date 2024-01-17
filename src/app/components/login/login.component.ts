@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import {AuthValidation} from '../../utils/auth-validation';
+import { AuthValidation } from '../../utils/auth-validation';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +45,7 @@ export class LoginComponent implements AfterViewInit {
       this.authService.login(this.email, this.password).subscribe(
         (response) => {
           const userData = response.body;
-          localStorage.setItem('token', userData.token);
+          this.authService.setAuthToken(userData.token);
         },
         (error) => {
           // handle the errors by response.status
