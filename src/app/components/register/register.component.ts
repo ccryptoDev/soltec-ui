@@ -9,6 +9,7 @@ import {AuthValidation} from '../../utils/auth-validation';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+  registerSuccess: boolean = false;
   firstName: string = '';
   lastName: string = '';
   email: string = '';
