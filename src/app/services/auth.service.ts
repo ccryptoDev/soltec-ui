@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
+  private readonly TOKEN_KEY = 'token';
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
@@ -16,15 +17,23 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/user/login`, body);
   }
 
+  logout() {
+    localStorage.removeItem(this.TOKEN_KEY);
+  }
+
   register(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/user`, user);
   }
 
   setAuthToken(token: string): void {
-    localStorage.setItem('token', token);
+    localStorage.setItem(this.TOKEN_KEY, token);
   }
 
   getAuthToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem(this.TOKEN_KEY);
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getAuthToken();
   }
 }
