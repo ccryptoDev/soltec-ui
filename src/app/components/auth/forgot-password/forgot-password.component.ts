@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthValidation } from '../../utils/auth-validation';
+import { AuthValidation } from '../../../utils/auth-validation';
 
 @Component({
   selector: 'app-forgot-password',

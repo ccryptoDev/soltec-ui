@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import {AuthValidation} from '../../utils/auth-validation';
+import {AuthValidation} from '../../../utils/auth-validation';
 
 @Component({
   selector: 'app-register',

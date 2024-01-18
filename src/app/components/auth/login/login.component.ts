@@ -1,7 +1,7 @@
 import { Component, AfterViewInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { AuthValidation } from '../../utils/auth-validation';
+import { AuthService } from '../../../services/auth.service';
+import { AuthValidation } from '../../../utils/auth-validation';
 
 @Component({
   selector: 'app-login',
