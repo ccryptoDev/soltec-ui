@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 20px;
+  transition: margin-left 0.5s;
+}
+
+.content-expanded {
+  margin-left: 243px;
+}

@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent {
+  isSidebarCollapsed: boolean = false;
 
+  constructor() {}
+
+  toggleSidebarCollapse() {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
 }

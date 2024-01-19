@@ -20,6 +20,8 @@ import { AuthInterceptor } from './services/auth-interceptor';
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { LayoutComponent } from './layout/layout.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ProjectsComponent,
+    LayoutComponent,
+    SidebarComponent,
   ],
   imports: [
     BrowserModule,

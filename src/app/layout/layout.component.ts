@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {
+  isSidebarCollapsed: boolean = false;
 
+  onToggleSidebarCollapse() {
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
 }
