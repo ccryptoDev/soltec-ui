@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-projects',
@@ -6,9 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./projects.component.scss']
 })
 export class ProjectsComponent {
-  isSidebarCollapsed: boolean = false;
+  isSidebarCollapsed: boolean = true;
 
-  constructor() {}
+  constructor(private sharedService: SharedService) {
+    this.sharedService.toggleCollapse.subscribe(() => {
+      this.toggleSidebarCollapse();
+    });
+  }
 
   toggleSidebarCollapse() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;

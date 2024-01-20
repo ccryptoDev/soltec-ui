@@ -1,14 +1,7 @@
-.container {
-  display: flex;
-  height: 100%;
+@import 'src/styles/page.scss';
+
+.page-container {
+
 }
 
-.content {
-  flex-grow: 1;
-  padding: 20px;
-  transition: margin-left 0.5s;
-}
 
-.content-expanded {
-  margin-left: 243px;
-}

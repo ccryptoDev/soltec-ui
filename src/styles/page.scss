@@ -1,0 +1,21 @@
+@import 'src/styles.scss';
+@import 'src/styles/_variables.scss';
+@import 'src/styles/constants.scss';
+
+.page-container {
+  display: flex;
+  height: 100%;
+
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 243px;
+    transition: margin-left 0.5s;
+
+    &.content-expanded {
+      margin-left: 60px;
+    }
+  }
+
+
+}

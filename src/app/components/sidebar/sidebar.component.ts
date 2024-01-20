@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,13 +7,12 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-  @Output() toggleCollapse = new EventEmitter<void>();
   isSidebarCollapsed: boolean = false;
 
-  constructor() {}
+  constructor(private sharedService: SharedService) {}
 
   onToggleCollapse() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
-    this.toggleCollapse.emit();
+    this.sharedService.toggleCollapse.emit();
   }
 }

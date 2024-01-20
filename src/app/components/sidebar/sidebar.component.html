@@ -1,7 +1,7 @@
 <div class="sidebar" [class.collapsed]="isSidebarCollapsed">
   <div class="sidebar-inner">
     <div class="sidebar-header">
-      <img src="assets/images/sidebar-logo.png" alt="soltec" (click)="onToggleCollapse();">
+      <img [src]="isSidebarCollapsed ? 'assets/images/collapse-logo.png' : 'assets/images/sidebar-logo.png'" alt="soltec" (click)="onToggleCollapse();">
     </div>
     <div class="sidebar-content">
       <div class="menu">
@@ -17,7 +17,10 @@
           <p>Admin</p>
         </div>
       </div>
-      <img src="assets/images/gear.png" />
+      <div class="footer-icons">
+        <img src="assets/images/gear.png" />
+        <img *ngIf="isSidebarCollapsed" src="assets/images/collapse.png">
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-layout',
@@ -7,6 +8,14 @@ import { Component } from '@angular/core';
 })
 export class LayoutComponent {
   isSidebarCollapsed: boolean = false;
+
+  constructor(private sharedService: SharedService) {}
+
+  ngOnInit() {
+    this.sharedService.toggleCollapse.subscribe(() => {
+      this.onToggleSidebarCollapse();
+    });
+  }
 
   onToggleSidebarCollapse() {
     this.isSidebarCollapsed = !this.isSidebarCollapsed;
