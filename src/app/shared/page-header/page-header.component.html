@@ -1,0 +1,31 @@
+<div class="header">
+  <h2 class="page-title">{{ pageName }}</h2>
+  <div class="header-bar">
+    <div class="search">
+      <input
+        type="text"
+        name="search-bar"
+        class="search-bar"
+        placeholder="Buscar proyecto"
+      >
+      <img
+        src="assets/images/search.png"
+        (click)="search.emit()"
+      >
+    </div>
+    <button
+      class="btn-header btn-filter"
+      (click)="filter.emit()"
+    >
+      <img src="assets/images/filter.png">
+      <span>FILTRAR</span>
+    </button>
+    <button
+      class="btn-header btn-create"
+      (click)="create.emit()"
+    >
+      <span class="plus">+</span>
+      <span>CREAR NUEVO</span>
+    </button>
+  </div>
+</div>

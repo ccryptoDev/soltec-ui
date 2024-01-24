@@ -1,5 +1,42 @@
 <div class="page-container">
   <div class="content" [ngClass]="{ 'content-expanded': !isSidebarCollapsed }">
-    <h1 class="text-center">Projects</h1>
+    <app-page-header
+      pageName="Proyectos"
+      (search)="onSearch($event)"
+      (filter)="onFilter()"
+      (createProject)="onCreate()"
+    ></app-page-header>
+    <div class="main">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <ng-container *ngFor="let column of displayedColumns">
+            <ng-container *ngIf="column !== 'actions'">
+              <ng-container matColumnDef="{{ column }}">
+                <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+                <td mat-cell *matCellDef="let project">{{ getCellValue(project, column) }}</td>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let project">
+              <button mat-icon-button (click)="editProject(project)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="downloadProject(project)">
+                <mat-icon>download</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteProject(project)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
   </div>
 </div>
