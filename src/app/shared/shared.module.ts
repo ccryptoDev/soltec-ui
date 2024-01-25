@@ -5,11 +5,13 @@ import { CommonModule } from '@angular/common';
 import { CustomInputComponent } from './custom-input/custom-input.component';
 import { MatIconModule } from '@angular/material/icon';
 import { PageHeaderComponent } from './page-header/page-header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     CustomInputComponent,
     PageHeaderComponent,
+    SidebarComponent,
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,8 @@ import { PageHeaderComponent } from './page-header/page-header.component';
   ],
   exports: [
     CustomInputComponent,
-    PageHeaderComponent
+    PageHeaderComponent,
+    SidebarComponent,
   ],
 })
 export class SharedModule {}

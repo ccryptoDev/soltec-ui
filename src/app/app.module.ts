@@ -24,7 +24,6 @@ import { ForgotPasswordComponent } from './components/auth/forgot-password/forgo
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { LayoutComponent } from './layout/layout.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ActiveColumnDirective } from './utils/active-column.directive';
 
 @NgModule({
@@ -36,7 +35,6 @@ import { ActiveColumnDirective } from './utils/active-column.directive';
     ResetPasswordComponent,
     ProjectsComponent,
     LayoutComponent,
-    SidebarComponent,
     ActiveColumnDirective
   ],
   imports: [
