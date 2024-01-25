@@ -8,34 +8,43 @@
     ></app-page-header>
     <div class="main">
       <div class="table-container">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-          <ng-container *ngFor="let column of displayedColumns">
-            <ng-container *ngIf="column !== 'actions'">
-              <ng-container matColumnDef="{{ column }}">
-                <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-                <td mat-cell *matCellDef="let project">{{ getCellValue(project, column) }}</td>
+        <table [@fadeInOnEnter]>
+          <thead>
+            <tr >
+              <th *ngFor="let col of tableColumns">
+                <ng-container *ngIf="col !== ''">
+                  <span (click)="sort(translatedColumn[col])" [class.active]="currentSortField === translatedColumn[col]">{{ col }}</span>
+                  <img [src]="currentSortField === translatedColumn[col] ? 'assets/images/down_active.png' : 'assets/images/down.png'">
+                </ng-container>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr *ngFor="let project of projects | paginate: { itemsPerPage: pageSize, currentPage: currentPage }"> -->
+            <tr *ngFor="let project of projects">
+              <ng-container *ngFor="let col of tableColumns">
+                <td *ngIf="col !== '' && translatedColumn[col] !== 'id'" [appActiveColumn]="currentSortField === translatedColumn[col]">
+                  {{ getPropertyValue(project, translatedColumn[col]) }}
+                </td>
               </ng-container>
-            </ng-container>
-          </ng-container>
-
-          <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let project">
-              <button mat-icon-button (click)="editProject(project)">
-                <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button (click)="downloadProject(project)">
-                <mat-icon>download</mat-icon>
-              </button>
-              <button mat-icon-button (click)="deleteProject(project)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+              <td>
+                <img
+                  [src]="(project.permission === 'Admin' || project.permission === 'Editor') ? 'assets/images/edit.png' :
+                          project.permission === 'Visor' ? 'assets/images/view.png' : 'assets/images/lock.png' "
+                  (click)="editProject(project)"
+                >
+                <img
+                  [src]="project.permission === 'Admin' || project.permission === 'Visor' || project.permission === 'Editor' ?
+                          'assets/images/download.png' : 'assets/images/download_deactive.png' "
+                  (click)="downloadProject(project)"
+                >
+                <img
+                  [src]="project.permission === 'Admin' ? 'assets/images/trash.png' : 'assets/images/trash_deactive.png' "
+                  (click)="deleteProject(project)"
+                >
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
   </div>

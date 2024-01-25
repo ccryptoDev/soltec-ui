@@ -25,6 +25,7 @@ import { ResetPasswordComponent } from './components/auth/reset-password/reset-p
 import { ProjectsComponent } from './components/projects/projects.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ActiveColumnDirective } from './utils/active-column.directive';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     ProjectsComponent,
     LayoutComponent,
     SidebarComponent,
+    ActiveColumnDirective
   ],
   imports: [
     BrowserModule,

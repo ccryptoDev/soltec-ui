@@ -1,7 +1,80 @@
 @import 'src/styles/page.scss';
 
-.page-container {
 
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #777;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+
+  tr {
+    border: 1px solid $third-color;
+  }
+
+  thead tr {
+    border-radius: 8px;
+
+    span {
+      cursor: pointer;
+      transition: opacity 0.5 ease;
+
+      &:hover {
+        opacity: 0.6;
+      }
+
+      &.active {
+        color: $secondary-color;
+        font-weight: 700;
+      }
+    }
+
+    img {
+      margin-left: 3px;
+    }
+  }
+
+  th, td {
+    padding: 11px 24px;;
+    text-align: left;
+  }
+
+  th {
+    background: #F6F8FA;
+  }
+
+  th:nth-child(1),
+  td:nth-child(1) {
+    width: 15%;
+    padding-left: 25px;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    width: 20%;
+  }
+
+  th:nth-child(3),
+  td:nth-child(3) {
+    width: 15%;
+  }
+
+  tbody tr {
+    td.active {
+      color: $secondary-color;
+      font-weight: 700;
+    }
+
+    img {
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+  }
 }
 
 
