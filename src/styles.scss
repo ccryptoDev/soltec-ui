@@ -46,6 +46,10 @@ $soltec-theme: mat.define-light-theme((
 
 @import './fonts.scss';
 
+
+@import 'styles/_variables.scss';
+@import 'styles/constants.scss';
+
 html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 body { margin: 0; font-family: 'Calibri Regular', 'Calibri Bold', 'Calibri Italic', 'Calibri Bold Italic', sans-serif; }

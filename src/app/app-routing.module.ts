@@ -6,13 +6,18 @@ import { ForgotPasswordComponent } from './components/auth/forgot-password/forgo
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
+import { InstanceComponent } from './components/instance/instance.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
-      {path: 'projects', component: ProjectsComponent}
+      {path: 'home', component: ProjectsComponent, data: {breadcrumb: 'Proyectos'}},
+      {path: 'projects', component: ProjectsComponent, data: {breadcrumb: 'Proyectos'}},
+      {path: 'projects/:id', component: ProjectDetailComponent, data: {breadcrumb: null}},
+      {path: 'projects/:id/instances/:instanceId', component: InstanceComponent, data: {breadcrumb: null}},
     ]
   },
   { path: 'login', component: LoginComponent },
