@@ -7,48 +7,48 @@
       </div>
 
       <div class="form-field mb-20">
-        <app-custom-input
+        <app-auth-input
           label="Nombre(s)"
           name="firstname"
           type="text"
           [(value)]="firstName"
           (firstnameChange)="updateFirstnameValidation()"
           [error]="firstnameRequired"
-        ></app-custom-input>
+        ></app-auth-input>
       </div>
 
       <div class="form-field mb-20">
-        <app-custom-input
+        <app-auth-input
           label="Apellido(s)"
           name="lastname"
           type="text"
           [(value)]="lastName"
           (lastnameChange)="updateLastnameValidation()"
           [error]="lastnameRequired"
-        ></app-custom-input>
+        ></app-auth-input>
       </div>
 
       <div class="form-field email-field mb-20" [class.mb-0]="!emailRequired && emailFormatError">
-        <app-custom-input
+        <app-auth-input
           label="Email"
           name="email"
           type="email"
           [(value)]="email"
           (emailChange)="updateEmailValidation()"
           [error]="emailRequired || emailFormatError"
-        ></app-custom-input>
+        ></app-auth-input>
         <div *ngIf="!emailRequired && emailFormatError" class="err-notif" [class.mt-10]="emailFormatError">El formato del correo electrónico no es válido</div>
       </div>
 
       <div class="form-field password-field" [class.mb-20]="!password" [class.mt-15]="!emailRequired && emailFormatError">
-        <app-custom-input
+        <app-auth-input
           label="Contaseña"
           name="password"
           type="password"
           [(value)]="password"
           (passwordChange)="updatePasswordValidation()"
           [error]="passwordRequired || passwordFormatError"
-        ></app-custom-input>
+        ></app-auth-input>
 
         <!-- password validation -->
         <div *ngIf="password" class="password-validation mt-10">
