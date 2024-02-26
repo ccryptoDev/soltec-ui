@@ -8,28 +8,28 @@
 
       <form (ngSubmit)="login()">
         <div class="form-field mb-25" [class.mb-0]="!emailRequired && emailFormatError">
-          <app-custom-input
+          <app-auth-input
             label="email"
             name="email"
             type="text"
             [(value)]="email"
             (emailChange)="updateEmailValidation()"
             [error]="emailRequired || emailFormatError"
-          ></app-custom-input>
+          ></app-auth-input>
           <div *ngIf="!emailRequired && emailFormatError" class="err-notif" [class.mt-10]="emailFormatError">
             El formato del correo electrónico no es válido
           </div>
         </div>
 
         <div class="form-field" [class.mt-15]="!emailRequired && emailFormatError">
-          <app-custom-input
+          <app-auth-input
             label="Contraseña"
             name="password"
             type="password"
             [(value)]="password"
             (passwordChange)="updatePasswordValidation()"
             [error]="passwordRequired"
-          ></app-custom-input>
+          ></app-auth-input>
         </div>
 
         <button

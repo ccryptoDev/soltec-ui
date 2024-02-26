@@ -45,7 +45,11 @@ export class LoginComponent implements AfterViewInit {
       this.authService.login(this.email, this.password).subscribe(
         (response) => {
           const userData = response.body;
+          // store a token
           this.authService.setAuthToken(userData.token);
+          // store the user profile inform
+          delete userData.token;
+          this.authService.setUserProfile(userData);
         },
         (error) => {
           // handle the errors by response.status
