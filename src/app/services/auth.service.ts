@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   private readonly TOKEN_KEY = 'token';
+  private readonly USER_KEY = 'user';
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
@@ -25,12 +26,24 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/user`, user);
   }
 
+  updateProfile(user: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/user/profile`, user);
+  }
+
   setAuthToken(token: string): void {
     localStorage.setItem(this.TOKEN_KEY, token);
   }
 
   getAuthToken() {
     return localStorage.getItem(this.TOKEN_KEY);
+  }
+
+  setUserProfile(userInfo: any): void {
+    localStorage.setItem(this.USER_KEY, JSON.stringify(userInfo));
+  }
+
+  getUserProfile() {
+    return localStorage.getItem(this.USER_KEY);
   }
 
   isLoggedIn(): boolean {
