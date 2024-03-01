@@ -1,15 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import { ProjectsService } from '../../services/projects.service';
 import { Project } from '../../models/project.model';
-import {collapseAnimation, fadeInOnEnterAnimation} from "angular-animations";
+import { collapseAnimation, fadeInOnEnterAnimation } from "angular-animations";
+import { NgbModal, NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { PermissionRequestModalComponent } from '../modals/permission-request-modal/permission-request-modal.component';
+import { SuccessModalComponent } from '../modals/success-modal/success-modal.component';
+import { ErrorModalComponent } from '../modals/error-modal/error-modal.component';
+import { CreateProjectModalComponent } from '../modals/create-project-modal/create-project-modal.component';
 import { ActiveColumnDirective } from '../../utils/active-column.directive';
-import { MatTableDataSource } from '@angular/material/table';
+import { ArrowPosition } from '../../common/tooltip/tooltip.enums';
+import { projectsDummy } from '../../utils/projects.dummy';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   animations: [
     fadeInOnEnterAnimation({
       duration: 400,
@@ -23,8 +31,11 @@ import { MatTableDataSource } from '@angular/material/table';
   ],
 })
 export class ProjectsComponent {
-  isSidebarCollapsed: boolean = true;
+  isSidebarCollapsed: boolean = false;
+  isCreateProjectModalOpen: boolean = false;
+
   projects: Project[] = [];
+  permissions: string[] = ['Admin', 'Visor', 'Editor', 'Sin permiso'];
   tableColumns: string[] = ['Nombre', 'Descripción', 'Creador', 'Fecha de creación', 'Actualizado', 'Permiso', ''];
   translatedColumn: Record<string, string> = {
     'Nombre': 'name',
@@ -34,10 +45,23 @@ export class ProjectsComponent {
     'Actualizado': 'updatedDate',
     'Permiso': 'permission'
   }
+
   currentSortField: string = '';
   isSortAscending: boolean = true;
 
-  constructor(private sharedService: SharedService, private projectsService: ProjectsService) {
+  ArrowPosition: typeof ArrowPosition = ArrowPosition;
+
+  // pagination parameters
+  page: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 24000;
+
+  constructor(
+    private router: Router,
+    private sharedService: SharedService,
+    private projectsService: ProjectsService,
+    private modalService: NgbModal
+  ) {
     this.sharedService.toggleCollapse.subscribe(() => {
       this.toggleSidebarCollapse();
     });
@@ -47,66 +71,90 @@ export class ProjectsComponent {
     // this.projectsService.getProjects().subscribe((projects) => {
     //   this.projects = projects;
     // });
-    this.projects = [
-      {
-        "id": 1,
-        "name": "Atacama",
-        "description": "Descripción del proyecto",
-        "creator": "Vera",
-        "createdDate": "2023-10-25",
-        "updatedDate": "2023-10-25",
-        "permission": "Admin"
-      },
-      {
-        "id": 2,
-        "name": "Castile-La Mancha",
-        "description": "Descripción del proyecto",
-        "creator": "Mario",
-        "createdDate": "2023-09-25",
-        "updatedDate": "2023-10-25",
-        "permission": "Admin"
-      },
-      {
-        "id": 3,
-        "name": "Atacama",
-        "description": "Descripción del proyecto",
-        "creator": "Hernadez",
-        "createdDate": "2023-02-25",
-        "updatedDate": "2023-04-25",
-        "permission": "Visor"
-      },
-      {
-        "id": 4,
-        "name": "Proyecto004",
-        "description": "Descripción del proyecto",
-        "creator": "Gabriela",
-        "createdDate": "2024-01-02",
-        "updatedDate": "2024-01-25",
-        "permission": "Admin"
-      },
-      {
-        "id": 5,
-        "name": "Proyecto005",
-        "description": "Descripción del proyecto",
-        "creator": "Sebastian",
-        "createdDate": "2022-10-25",
-        "updatedDate": "2022-11-25",
-        "permission": "Sin permiso"
-      },
-      {
-        "id": 6,
-        "name": "Proyecto003",
-        "description": "Descripción del proyecto",
-        "creator": "Roberto",
-        "createdDate": "2022-12-22",
-        "updatedDate": "2023-12-25",
-        "permission": "Admin"
-      }
-    ];
+    this.projects = projectsDummy;
+    this.isSidebarCollapsed = this.sharedService.getSidebarCollapseState();
   }
 
-  editProject(project: Project) {
+  editProject(projectId: number) {
+    this.router.navigate(['/projects', projectId]);
+  }
 
+  accessRequest(permission: string, projectId: number) {
+    const modalRef = this.modalService.open(PermissionRequestModalComponent, {
+      centered: true,
+      size: 'custom',
+      windowClass: 'access-request-modal'
+    });
+    modalRef.componentInstance.permissions = this.permissions;
+    modalRef.componentInstance.currentPermission = permission;
+
+    modalRef.result.then(
+      (result) => {
+        if (result) {
+          const requestBody = {
+            reason: result.description,
+            permission: result.permission,
+          };
+
+          this.openSuccessModal().then(
+            (result) => {
+              console.log('Success modal closed with result: ', result);
+            },
+            (reason) => {
+              console.log('Success modal dismissed with reason: ', reason);
+            }
+          );
+
+          // this.openErrorModal(projectId, requestBody).then(
+          //   (result) => {
+          //     console.log('Error modal closed with result: ', result);
+          //   },
+          //   (reason) => {
+          //     console.log('Error modal dismissed with reason: ', reason);
+          //   }
+          // );
+
+          // commented for now
+          // this.projectsService.accessRequest(projectId, requestBody).subscribe(
+          //   (response) => {
+          //     if (response?.success)
+          //       this.openSuccessModal();
+          //     else
+          //       this.openErrorModal(projectId, requestBody);
+          //   },
+          //   (error) => {
+          //     console.error('Error sending access request: ', error);
+          //   }
+          // );
+        }
+      },
+      (reason) => {
+        console.log('Modal dismissed with reason: ', reason);
+      }
+    );
+  }
+
+  openSuccessModal() {
+    const successModalRef = this.modalService.open(SuccessModalComponent, {
+      centered: true,
+      size: 'custom',
+      windowClass: 'success-modal custom-modal-center'
+    });
+
+    return successModalRef.result;
+  }
+
+  openErrorModal(projectId: number, requestBody: any) {
+    const errorModalRef = this.modalService.open(ErrorModalComponent, {
+      centered: true,
+      size: 'custom',
+      windowClass: 'error-modal custom-modal-center'
+    });
+
+    errorModalRef.componentInstance.projectId = projectId;
+    errorModalRef.componentInstance.requestBody = requestBody;
+
+    return errorModalRef.result;
   }
 
   downloadProject(project: Project) {
@@ -150,6 +198,14 @@ export class ProjectsComponent {
     return project[key as keyof Project];
   }
 
+  onCreate() {
+    this.isCreateProjectModalOpen = true;
+  }
+
+  closeCreateProjectModal() {
+    this.isCreateProjectModalOpen = false;
+  }
+
   onSearch(key: string) {
 
   }
@@ -158,8 +214,8 @@ export class ProjectsComponent {
 
   }
 
-  onCreate() {
-
+  onPageChange(page: number) {
+    this.page = page;
   }
 
   toggleSidebarCollapse() {
