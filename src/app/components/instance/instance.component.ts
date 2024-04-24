@@ -9,6 +9,10 @@ import { Instance, ProjectDetails, History, ProjectDetailData } from '../../mode
 import * as InstanceModel from '../../models/instance.model';
 import { projectsDetailDummy } from '../../utils/projects-detail.dummy';
 import { instanceDummy, instanceDummy_1 } from '../../utils/instance.dummy';
+// import {Store} from '@ngrx/store';
+// import {Store} from '@ngrx/Store'
+import {ApiService} from '../../api/pasos2-1'
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-instance',
@@ -22,8 +26,12 @@ export class InstanceComponent {
 
   isSidebarCollapsed: boolean = false;
   isHistoryCollapsed: boolean = false;
+  isToggleChecked: boolean = false;
   showingCreateForm: boolean = false;
   isSelectInstanceModalOpen: boolean = false;
+
+  step2Response = new BehaviorSubject<any>({})
+  step2ResponseObservable$ = this.step2Response.asObservable()
 
   currentSortField: string = '';
   isSortAscending: boolean = true;
@@ -31,7 +39,7 @@ export class InstanceComponent {
 
   projectId: string | null = '';
   instanceId: string | null = '';
-
+  ischecked: boolean = false;
   // project information
   projectDetails: ProjectDetails = {
     name: "",
@@ -103,6 +111,7 @@ export class InstanceComponent {
   selectedFilesFromModal: InstanceModel.InstanceFile[] = [];
 
   constructor(
+    private apiService: ApiService,
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private projectsService: ProjectsService,
@@ -110,6 +119,7 @@ export class InstanceComponent {
   ) {
     this.sharedService.toggleCollapse.subscribe(() => {
       this.toggleSidebarCollapse();
+      
     });
   }
 
@@ -207,9 +217,17 @@ export class InstanceComponent {
   goToNextStep(): void {
     if (this.currentStep < this.steps.length) {
       this.currentStep++;
+      if(this.currentStep === 2){
+        this.apiService.getInstanciaID('ins5').then(res => {
+          console.log(res)
+          this.step2Response.next(res)
+        })
+      }
     }
   }
-
+  onCheckboxChange(item: any) {
+    item.selected = !item.selected;
+  }
   goToPrevStep(): void {
     if (this.currentStep > 1) {
       this.currentStep--;
@@ -362,5 +380,12 @@ export class InstanceComponent {
         return 0;
       }
     });
+  }
+
+  consoleLog(data: any) {
+    console.log("step2 response", {data})
+  }
+  toggleSwitch() {
+    this.isToggleChecked = !this.isToggleChecked;
   }
 }

@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -72,6 +73,7 @@ import { SelectInstanceModalComponent } from './components/modals/select-instanc
     MatFormFieldModule,
     MatTableModule,
     MatSortModule,
+    MatSlideToggleModule,
     MatPaginatorModule,
     SharedModule,
     TooltipModule,
