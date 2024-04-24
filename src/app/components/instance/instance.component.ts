@@ -30,6 +30,7 @@ export class InstanceComponent {
   showingCreateForm: boolean = false;
   isSelectInstanceModalOpen: boolean = false;
 
+  trackers_block_names : any[] = []
   step2Response = new BehaviorSubject<any>({})
   step2ResponseObservable$ = this.step2Response.asObservable()
 
@@ -225,8 +226,15 @@ export class InstanceComponent {
       }
     }
   }
-  onCheckboxChange(item: any) {
-    item.selected = !item.selected;
+  onSelectedTrackers(item: any) {
+    if(this.trackers_block_names?.includes(item)){
+      let _trackers_block_names = this.trackers_block_names.filter(i => i !== item);
+      this.trackers_block_names = _trackers_block_names
+    }else{
+      this.trackers_block_names.push(item)
+    }
+
+    console.log('checking trackes ===', this.trackers_block_names)
   }
   goToPrevStep(): void {
     if (this.currentStep > 1) {
