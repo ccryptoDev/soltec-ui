@@ -1,10 +1,19 @@
 import axios from "axios";
 import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
+  private apiUrl = 'http://18.219.225.37:3333/api/swagger/'; // Example API endpoint
+
+  constructor(private http: HttpClient) { }
+
+  postDataStep2(data: any) {
+    return this.http.post(this.apiUrl, data);
+  }
+
     getInstanciaID(instanciaId: string) {
         // return axios.post('http://18.219.225.37:3333/api/swagger', {
         //   instanciaId: instanciaId,

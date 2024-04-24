@@ -31,6 +31,7 @@ export class InstanceComponent {
   isSelectInstanceModalOpen: boolean = false;
 
   trackers_block_names : any[] = []
+  trackers_block_names_right : any[] = []
   step2Response = new BehaviorSubject<any>({})
   step2ResponseObservable$ = this.step2Response.asObservable()
 
@@ -220,21 +221,29 @@ export class InstanceComponent {
       this.currentStep++;
       if(this.currentStep === 2){
         this.apiService.getInstanciaID('ins5').then(res => {
-          console.log(res)
           this.step2Response.next(res)
         })
       }
     }
   }
-  onSelectedTrackers(item: any) {
-    if(this.trackers_block_names?.includes(item)){
-      let _trackers_block_names = this.trackers_block_names.filter(i => i !== item);
-      this.trackers_block_names = _trackers_block_names
-    }else{
-      this.trackers_block_names.push(item)
+  onSelectedTrackers(item: any, d:string) {
+    
+    if(d == '1') {
+      if(this.trackers_block_names?.includes(item)){
+        let _trackers_block_names = this.trackers_block_names.filter(i => i !== item);
+        this.trackers_block_names = _trackers_block_names
+      }else{
+        this.trackers_block_names.push(item)
+      }
+    } else if (d == '2') {
+      if(this.trackers_block_names_right?.includes(item)){
+        let _trackers_block_names = this.trackers_block_names_right.filter(i => i !== item);
+        this.trackers_block_names_right = _trackers_block_names
+      }else{
+        this.trackers_block_names_right.push(item)
+      }
     }
-
-    console.log('checking trackes ===', this.trackers_block_names)
+    this.updateStepCompletionStatus(2, this.trackers_block_names.length > 0 || this.trackers_block_names_right.length > 0);
   }
   goToPrevStep(): void {
     if (this.currentStep > 1) {
@@ -350,6 +359,7 @@ export class InstanceComponent {
   }
 
   canAdvanceToNextStep(): boolean {
+    return this.stepCompletionStatus[this.currentStep - 1];
     // Check if all previous steps are completed
     if (this.currentStep !== 1) {
       for (let i = 0; i < this.currentStep - 1; i++) {
@@ -362,7 +372,7 @@ export class InstanceComponent {
     if (this.currentStep === 1) {
       return this.stepCompletionStatus[this.currentStep - 1];
     }
-
+    
     // do here for the other steps
     return false;
   }
