@@ -12,7 +12,6 @@ import { projectsDetailDummy } from '../../utils/projects-detail.dummy';
 import { instanceDummy, instanceDummy_1, instanceTrackerDummy } from '../../utils/instance.dummy';
 // import {Store} from '@ngrx/store';
 // import {Store} from '@ngrx/Store'
-import { InstancesService } from '../../services/instances.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -119,7 +118,6 @@ export class InstanceComponent {
   selectedFilesFromModal: InstanceModel.InstanceFile[] = [];
 
   constructor(
-    private instanceService: InstancesService,
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private projectsService: ProjectsService,
@@ -227,9 +225,12 @@ export class InstanceComponent {
       this.currentStep++;
       if(this.currentStep === 2){
         this.instanceTrackers = instanceTrackerDummy;
-        // this.instanceService.getInstanceID('ins5').subscribe((instanceTracker) => {
+        // this.projectsService.getInstanceID('ins5').subscribe((instanceTracker) => {
         //   this.instanceTrackers = instanceTracker;
         // })
+      }
+      if(this.currentStep === 3) {
+        
       }
     }
   }
