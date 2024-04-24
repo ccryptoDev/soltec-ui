@@ -37,11 +37,13 @@ import { ShareProjectModalComponent } from './components/modals/share-project-mo
 import { InstanceComponent } from './components/instance/instance.component';
 import { CreateInstanceModalComponent } from './components/modals/create-instance-modal/create-instance-modal.component';
 import { SelectInstanceModalComponent } from './components/modals/select-instance-modal/select-instance-modal.component';
+import { TrackerDrawComponent } from './components/tracker-draw/tracker-draw.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    TrackerDrawComponent,
     RegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,

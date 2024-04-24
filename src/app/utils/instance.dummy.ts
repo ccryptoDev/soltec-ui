@@ -84,7 +84,49 @@ export const instanceDummy_1 = {
   "coordinateSets": [],
   "history": []
 }
+export const instanceTrackerDrawDummy = {
+  "trackers_count": 2183,
+  "slaves_count": 2132,
+  "possible_trackers_count": 0,
+  "trackers": [
+    {
+      "tracker_id": 1,
+      "name": "T03-04-001",
+      "point_SW": [64518, 4206918],
+      "point_SE": [64520, 4206918],
+      "point_NW": [64520, 4206951],
+      "point_NE": [64518, 4206951]
+    },
+    {
+      "tracker_id": 2,
+      "name": "T03-04-001",
+      "point_SW": [64518, 4206918],
+      "point_SE": [64520, 4206918],
+      "point_NW": [64520, 4206951],
+      "point_NE": [64518, 4206951]
+    },
+    {
+      "tracker_id": 3,
+      "name": "T03-04-001",
+      "point_SW": [64518, 4206918],
+      "point_SE": [64520, 4206918],
+      "point_NW": [64520, 4206951],
+      "point_NE": [64518, 4206951]
+    }
+  ],
+  "possible_trackers": [
+    {
+      "tracker_id": 4,
+      "name": "T03-04-001",
+      "point_SW": [64518, 4206918],
+      "point_SE": [64520, 4206918],
+      "point_NW": [64520, 4206951],
+      "point_NE": [64518, 4206951]
+    },
+  ]
 
+
+}
 export const instanceTrackerDummy = {
   is_cardan: true,
   tracker_tags: [
