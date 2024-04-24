@@ -209,7 +209,7 @@
             <div *ngIf="currentStep === 2" class="inner"> <!-- step 2 -->
               <!-- step 2 header -->
               <div class="step-title">
-                <h4 class="regular-bold-text">Confirma los atributos de los trackers y drivers (si es que se detectan
+                <h4 class="font-calibri tracker-header-text font-18">Confirma los atributos de los trackers y drivers (si es que se detectan
                   elementos “Cardan”)</h4>
               </div>
               <!-- step 2 header -->
@@ -223,28 +223,14 @@
                     <h3 class="tracker-header h-67">Trackers</h3>
                   </div>
                   <div>
-                    <!-- <label class="tracker-check">
-                      <input type="checkbox" value="TxxYzz">TxxYzz
-                    </label>
-                    <label class="tracker-check">
-                      <input type="checkbox" value="ZZZ">ZZZ
-                    </label>
-                    <label class="tracker-check">
-                      <input type="checkbox" value="S/M">S/M
-                    </label>
-                    <label class="tracker-check">
-                      <input type="checkbox" value="MMM">MMM
-                    </label> -->
-
-                    <ng-container >
-                      
-                      <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check" [ngClass]="{'active' : trackers_block_names.includes(item)}">
-                        <label>
-                          <input type="checkbox" [checked]="trackers_block_names.includes(item)" (change)="onSelectedTrackers(item, '1') ">
+                      <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check"
+                        [ngClass]="{'active' : trackers_block_names.includes(item)}">
+                        <div class="custom-checkbox">
+                          <input type="checkbox" [checked]="trackers_block_names.includes(item)"
+                            (change)="onSelectedTrackers(item, '1') ">
                           {{ item }}
-                        </label>
+                        </div>
                       </div>
-                    </ng-container>
                   </div>
 
                 </div> <!-- /layout file uploader -->
@@ -256,19 +242,19 @@
                   </div>
                   <div class="tracker-body">
 
-                    <ng-container >
-                      
                       <p *ngIf="instanceTrackers['is_cardan'] == false">No se ha encontrado ningún cardan en el
                         layout.</p>
                       <div *ngIf="instanceTrackers['is_cardan'] == true" class="tracker-body">
                         <div *ngIf="isToggleChecked == false">
-                          <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check" [ngClass]="{'active' : trackers_block_names_right.includes(item)}">
-                            <label>
-                              <input type="checkbox"  (change)="onSelectedTrackers(item, '2') ">
+                          <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check"
+                            [ngClass]="{'active' : trackers_block_names_right.includes(item)}">
+                            <label class="custom-checkbox">
+                              <input type="checkbox" (change)="onSelectedTrackers(item, '2')">
                               {{ item }}
                             </label>
                           </div>
                         </div>
+
                         <div *ngIf="isToggleChecked == true" class="tracker-body-layout h-40">
                           <div class="tracker-slave-half tracker-body-left">
                             <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check">
@@ -278,7 +264,7 @@
                             </div>
                           </div>
                           <div class="tracker-slave-half tracker-body-right">
-                            <h3>Selecciona un tag para ver sus valores.</h3>
+                            <p class="tracker-right-text">Selecciona un tag para ver sus valores.</p>
                           </div>
                         </div>
 
@@ -289,11 +275,12 @@
                         <div (click)="toggleSwitch()">
                           <div class="toggle-switch">
                             <div class="toggle-slider" [ngClass]="{ 'checked': isToggleChecked }"></div>
-                          </div><p class="tracker-footer">Esclavo está en el tag 'value'.</p>
+                          </div>
+                          <p class="tracker-footer">Esclavo está en el tag 'value'.</p>
                         </div>
 
                       </div>
-                    </ng-container>
+                      
                   </div>
 
                 </div> <!-- /typograph file uploader -->
