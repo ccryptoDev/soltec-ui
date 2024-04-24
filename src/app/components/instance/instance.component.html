@@ -236,9 +236,9 @@
                       <input type="checkbox" value="MMM">MMM
                     </label> -->
 
-                    <ng-container *ngIf="step2ResponseObservable$ | async as step2ResponseObservable">
-                      {{consoleLog(step2ResponseObservable['tracker_tags'])}}
-                      <div *ngFor="let item of step2ResponseObservable['tracker_tags']" class="tracker-check" [ngClass]="{'active' : trackers_block_names.includes(item)}">
+                    <ng-container >
+                      
+                      <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check" [ngClass]="{'active' : trackers_block_names.includes(item)}">
                         <label>
                           <input type="checkbox" [checked]="trackers_block_names.includes(item)" (change)="onSelectedTrackers(item, '1') ">
                           {{ item }}
@@ -256,22 +256,22 @@
                   </div>
                   <div class="tracker-body">
 
-                    <ng-container *ngIf="step2ResponseObservable$ | async as step2ResponseObservable">
-                      {{consoleLog(step2ResponseObservable['is_cardan']==true)}}
-                      <p *ngIf="step2ResponseObservable['is_cardan'] == false">No se ha encontrado ningún cardan en el
+                    <ng-container >
+                      
+                      <p *ngIf="instanceTrackers['is_cardan'] == false">No se ha encontrado ningún cardan en el
                         layout.</p>
-                      <div *ngIf="step2ResponseObservable['is_cardan'] == true" class="tracker-body">
+                      <div *ngIf="instanceTrackers['is_cardan'] == true" class="tracker-body">
                         <div *ngIf="isToggleChecked == false">
-                          <div *ngFor="let item of step2ResponseObservable['tracker_tags']" class="tracker-check" [ngClass]="{'active' : trackers_block_names_right.includes(item)}">
+                          <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check" [ngClass]="{'active' : trackers_block_names_right.includes(item)}">
                             <label>
-                              <input type="checkbox" [checked]="item.selected" (change)="onSelectedTrackers(item, '2') ">
+                              <input type="checkbox"  (change)="onSelectedTrackers(item, '2') ">
                               {{ item }}
                             </label>
                           </div>
                         </div>
                         <div *ngIf="isToggleChecked == true" class="tracker-body-layout h-40">
                           <div class="tracker-slave-half tracker-body-left">
-                            <div *ngFor="let item of step2ResponseObservable['tracker_tags']" class="tracker-check">
+                            <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check">
                               <label>
                                 {{ item }}
                               </label>

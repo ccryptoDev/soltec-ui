@@ -5,6 +5,11 @@ export interface InstanceFile {
   fileCategory: string;
   createdAt: string;
 }
+export interface InstanceTracker {
+  is_cardan: boolean,
+  tracker_tags: string[],
+  tracker_tags_and_texts: {}
+}
 
 export interface Coordinate {
   tracker_id: string;
@@ -43,3 +48,4 @@ export interface FileQueueItem {
   error: boolean;
   progress: number;
 }
+

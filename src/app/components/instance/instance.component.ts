@@ -7,11 +7,12 @@ import { ProjectsService } from '../../services/projects.service';
 // import { collapseAnimation, fadeInOnEnterAnimation } from "angular-animations";
 import { Instance, ProjectDetails, History, ProjectDetailData } from '../../models/project.model';
 import * as InstanceModel from '../../models/instance.model';
+import {InstanceTracker} from '../../models/instance.model';
 import { projectsDetailDummy } from '../../utils/projects-detail.dummy';
-import { instanceDummy, instanceDummy_1 } from '../../utils/instance.dummy';
+import { instanceDummy, instanceDummy_1, instanceTrackerDummy } from '../../utils/instance.dummy';
 // import {Store} from '@ngrx/store';
 // import {Store} from '@ngrx/Store'
-import {ApiService} from '../../api/pasos2-1'
+import { InstancesService } from '../../services/instances.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -32,8 +33,13 @@ export class InstanceComponent {
 
   trackers_block_names : any[] = []
   trackers_block_names_right : any[] = []
-  step2Response = new BehaviorSubject<any>({})
-  step2ResponseObservable$ = this.step2Response.asObservable()
+  // step2Response = new BehaviorSubject<any>({})
+  // step2ResponseObservable$ = this.step2Response.asObservable()
+  instanceTrackers : InstanceTracker = {
+    is_cardan: false,
+    tracker_tags: [],
+    tracker_tags_and_texts: []
+  }
 
   currentSortField: string = '';
   isSortAscending: boolean = true;
@@ -113,7 +119,7 @@ export class InstanceComponent {
   selectedFilesFromModal: InstanceModel.InstanceFile[] = [];
 
   constructor(
-    private apiService: ApiService,
+    private instanceService: InstancesService,
     private route: ActivatedRoute,
     private sharedService: SharedService,
     private projectsService: ProjectsService,
@@ -220,9 +226,10 @@ export class InstanceComponent {
     if (this.currentStep < this.steps.length) {
       this.currentStep++;
       if(this.currentStep === 2){
-        this.apiService.getInstanciaID('ins5').then(res => {
-          this.step2Response.next(res)
-        })
+        this.instanceTrackers = instanceTrackerDummy;
+        // this.instanceService.getInstanceID('ins5').subscribe((instanceTracker) => {
+        //   this.instanceTrackers = instanceTracker;
+        // })
       }
     }
   }
@@ -400,9 +407,7 @@ export class InstanceComponent {
     });
   }
 
-  consoleLog(data: any) {
-    console.log("step2 response", {data})
-  }
+  
   toggleSwitch() {
     this.isToggleChecked = !this.isToggleChecked;
   }

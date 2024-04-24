@@ -84,3 +84,28 @@ export const instanceDummy_1 = {
   "coordinateSets": [],
   "history": []
 }
+
+export const instanceTrackerDummy = {
+  is_cardan: true,
+  tracker_tags: [
+    "I",
+    "N",
+    "D"
+  ],
+  tracker_tags_and_texts: {
+    I: [
+      "TL01.T.04.02.03.02.141.I",
+      "TL01.T.06.02.03.08.164.I",
+      "TL01.T.02.01.02.05.041.I"
+    ],
+    N: [
+      "TL01.T.06.01.01.01.004.M"
+    ],
+    D: [
+      "TL01.T.04.01.03.06.072.D",
+      "TL01.T.01.01.01.08.026.D",
+      "TL01.T.06.02.01.02.089.D",
+      "TL01.T.06.02.01.02.087.D"
+    ]
+  }
+}
