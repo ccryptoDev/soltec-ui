@@ -5,17 +5,19 @@ import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
   templateUrl: './tracker-draw.component.html',
   styleUrls: ['./tracker-draw.component.scss']
 })
-export class TrackerDrawComponent {
-  @ViewChild('myCanvas') canvas: ElementRef<HTMLCanvasElement>;
+export class TrackerDrawComponent implements AfterViewInit {
+  @ViewChild('myCanvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
 
   ngAfterViewInit(): void {
     const ctx = this.canvas.nativeElement.getContext('2d');
-    // ctx.beginPath();
-    // ctx.moveTo(50, 50);   // Move to the first point
-    // ctx.lineTo(200, 50);  // Draw a line to the second point
-    // ctx.lineTo(200, 150); // Draw a line to the third point
-    // ctx.lineTo(50, 150);  // Draw a line to the fourth point
-    // ctx.closePath();      // Close the path to complete the rectangle
-    // ctx.stroke();         // Stroke the rectangle
+    if (ctx) {
+      // Draw a red rectangle
+      ctx.fillStyle = 'red';
+      ctx.fillRect(50, 50, 100, 75);
+
+      // Draw a blue rectangle
+      ctx.fillStyle = 'blue';
+      ctx.fillRect(200, 100, 150, 100);
+    }
   }
 }

@@ -455,115 +455,161 @@ input[type="checkbox"] {
   }
 
   .tracker-check {
-    width: 70%;
-    margin: 20px 15%;
+    width: 328px;
+    margin-top: 20px;
     height: 56px;
     display: block;
-    border-radius: 5px;
+    border-radius: 8px;
     line-height: 56px;
     border: 1px solid gainsboro;
     text-align: left;
     padding-left: 30px;
   }
 
+  .tracker-check.toggleCheck {
+    width: 248px;
+    height: 54px;
+    
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .flex-center {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .tracker-check:active {
     border-color: orange;
   }
 
-  .tracker-check.active{
+  .tracker-check.active {
     border-color: orange;
-    box-shadow: 1px 1px 2px 1px rgba(54, 33, 33, 0.2);
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.13);
   }
+
   .tracker-form {
     width: 444px;
     height: 411px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #ccc;
     padding: 0px;
   }
+
   .tracker-body {
     position: relative;
-    height: 280px;
+    height: 304px;
     margin-top: 0px;
   }
+
   .tracker-body-layout {
     display: flex;
-    height: 300px!important;
+    height: 304px;
+    justify-content: center;
 
     .tracker-body-left {
       flex-basis: 50%;
       border-right: 1px solid #999;
-      height: 280px;
+      height: 304px;
       background-color: #F2F2F2;
     }
+
     .tracker-body-right {
       flex-basis: 50%;
-      height: 280px;
+      height: 304px;
     }
   }
 
   .toggle-switch {
     position: relative;
     display: block;
-    width: 40px;
-    height: 20px;
-    background-color: orange;
-    border-radius: 10px;
+    width: 48px;
+    height: 24px;
+    background-color: #6A7A8C;
+    border-radius: 12px;
     position: relative;
     cursor: pointer;
     float: left;
   }
-  
+
+  .toggle-switch.active {
+    background-color: orange;
+  }
+
+  .toggle-background-clicked {
+    background-color: orange;
+  }
+
   .toggle-slider {
     width: 16px;
     height: 16px;
     background-color: #fff;
     border-radius: 50%;
     position: absolute;
-    top: 2px;
-    left: 2px;
+    top: 4px;
+    left: 4px;
     transition: transform 0.3s;
   }
-  
+
   .checked {
-    transform: translateX(20px);
+    transform: translateX(24px);
   }
-  
+
   .tracker-slave-form {
     width: 578px;
     height: 411px;
-    border-radius: 8px;
+    border-radius: 10px;
     border: 1px solid #ccc;
     padding: 0px;
   }
-
+  .tracker-draw-items {
+    width: 375px;
+    height: 350px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    padding: 0px;
+  }
   .h-67 {
     height: 67px;
     line-height: 67px;
     padding: 0px;
     margin: 0px;
   }
+
   .tracker-footer {
     cursor: pointer;
-    margin-top: 10px;
     text-align: left;
+    margin-top: 5px;
     margin-left: 50px;
   }
+
   .h-40 {
     height: 40px;
     line-height: 40px;
   }
+
   .tracker-toggle {
     height: 40px;
     margin-top: 0px;
     padding-left: 50px;
     border-top: 1px solid #ccc;
   }
-  .tracker-shadow {
-    box-shadow: 3px 3px 4px 2px rgba(0, 0, 0, 0.5);
-  }
+
   .font-18 {
     font-size: 18px;
+  }
+
+  .font-16 {
+    font-size: 16px;
+  }
+
+  .line-22 {
+    line-height: 22px;
+  }
+
+  .font-w-400 {
+    font-weight: 400;
   }
 
   .tracker-header-text {
@@ -571,9 +617,11 @@ input[type="checkbox"] {
     line-height: 22px;
     text-align: center;
   }
+
   .font-calibri {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
+
   .tracker-right-text {
     width: 241px;
     padding: 10px;
@@ -585,7 +633,11 @@ input[type="checkbox"] {
     text-align: center;
     margin-top: 10px;
   }
+
   .custom-checkbox {
+    display: flex;
+    justify-content: left;
+    align-items: center;
 
     input[type="checkbox"] {
       /* Hide the default checkbox */
@@ -600,8 +652,9 @@ input[type="checkbox"] {
       background-size: 100% 100%;
       padding: 0;
       margin: 0;
+      margin-right: 5px;
     }
-  
+
     input[type="checkbox"]:checked::before {
       content: '';
       position: absolute;

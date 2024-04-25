@@ -7,9 +7,10 @@ import { ProjectsService } from '../../services/projects.service';
 // import { collapseAnimation, fadeInOnEnterAnimation } from "angular-animations";
 import { Instance, ProjectDetails, History, ProjectDetailData } from '../../models/project.model';
 import * as InstanceModel from '../../models/instance.model';
-import {InstanceTracker} from '../../models/instance.model';
+import { TrackerDrawComponent } from '../tracker-draw/tracker-draw.component'
+import { InstanceTracker, InstanceTrackerDrawList, TrackerInformation } from '../../models/instance.model';
 import { projectsDetailDummy } from '../../utils/projects-detail.dummy';
-import { instanceDummy, instanceDummy_1, instanceTrackerDummy } from '../../utils/instance.dummy';
+import { instanceDummy, instanceDummy_1, instanceTrackerDummy, instanceTrackerDrawDummy } from '../../utils/instance.dummy';
 // import {Store} from '@ngrx/store';
 // import {Store} from '@ngrx/Store'
 import { BehaviorSubject } from 'rxjs';
@@ -23,18 +24,47 @@ import { BehaviorSubject } from 'rxjs';
 export class InstanceComponent {
   @ViewChild('layoutFileInput') layoutFileInput!: ElementRef;
   @ViewChild('typoFileInput') typoFileInput!: ElementRef;
+  @ViewChild('myCanvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
 
+  ngAfterViewInit(): void {
+    // Access the canvas context and draw the rectangle here
+    const ctx = this.canvas.nativeElement.getContext('2d');
+    if (ctx) {
+      ctx.fillStyle = 'black';  // Set the background color to black
+      ctx.fillRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);  // Fill the entire canvas with black
+      ctx.fillStyle = 'white';  // Set the fill color for the rectangle
+      ctx.fillRect(50, 50, 150, 100);  // Draw a white rectangle at position (50, 50) with width 150 and height 100
+    }
+  }
   isSidebarCollapsed: boolean = false;
   isHistoryCollapsed: boolean = false;
   isToggleChecked: boolean = false;
   showingCreateForm: boolean = false;
   isSelectInstanceModalOpen: boolean = false;
+  isStep2flag: boolean = false;
 
-  trackers_block_names : any[] = []
-  trackers_block_names_right : any[] = []
+  trackers_block_names: any[] = []
+  trackers_block_names_right: any[] = []
+  trackerInformation: TrackerInformation[] = [
+    {
+      "tracker_id": 0,
+      "name": "",
+      "point_SW": [],
+      "point_SE": [],
+      "point_NW": [],
+      "point_NE": []
+    }
+  ]
+  instanceTrackerDrawDummy: InstanceTrackerDrawList = {
+    "trackers_count": 0,
+    "slaves_count": 0,
+    "possible_trackers_count": 0,
+    "trackers": this.trackerInformation,
+    "possible_trackers": this.trackerInformation
+  }
   // step2Response = new BehaviorSubject<any>({})
   // step2ResponseObservable$ = this.step2Response.asObservable()
-  instanceTrackers : InstanceTracker = {
+  instanceTrackers: InstanceTracker = {
     is_cardan: false,
     tracker_tags: [],
     tracker_tags_and_texts: []
@@ -125,7 +155,7 @@ export class InstanceComponent {
   ) {
     this.sharedService.toggleCollapse.subscribe(() => {
       this.toggleSidebarCollapse();
-      
+
     });
   }
 
@@ -222,36 +252,52 @@ export class InstanceComponent {
 
   goToNextStep(): void {
     if (this.currentStep < this.steps.length) {
-      this.currentStep++;
-      if(this.currentStep === 2){
-        this.instanceTrackers = instanceTrackerDummy;
+      if (this.currentStep === 2 && this.isStep2flag === false) {
+        this.currentStep--
+        this.isStep2flag = true
+      }
+      this.currentStep++; 
+      if (this.currentStep === 2) {
+        if (this.isStep2flag == true) {
+          this.instanceTrackerDrawDummy = instanceTrackerDrawDummy;
+          console.log(this.instanceTrackerDrawDummy, 'aaaaaa');
+        } else
+          this.instanceTrackers = instanceTrackerDummy;
         // this.projectsService.getInstanceID('ins5').subscribe((instanceTracker) => {
         //   this.instanceTrackers = instanceTracker;
         // })
       }
-      if(this.currentStep === 3) {
-        
+      // if(this.currentStep === 2 && this.isStep2flag == true) {
+      //   // this.instanceTrackersDraw = instanceTrackerDrawDummy;
+
+      // }
+      if (this.currentStep === 3) {
+        // if(this.isStep2flag == false) {
+        //   this.currentStep = 2;
+        //   this.isStep2flag = true;
+        // }
       }
     }
   }
-  onSelectedTrackers(item: any, d:string) {
-    
-    if(d == '1') {
-      if(this.trackers_block_names?.includes(item)){
+  onSelectedTrackers(item: any, d: string) {
+
+    if (d == '1') {
+      if (this.trackers_block_names?.includes(item)) {
         let _trackers_block_names = this.trackers_block_names.filter(i => i !== item);
         this.trackers_block_names = _trackers_block_names
-      }else{
+      } else {
         this.trackers_block_names.push(item)
       }
     } else if (d == '2') {
-      if(this.trackers_block_names_right?.includes(item)){
+      if (this.trackers_block_names_right?.includes(item)) {
         let _trackers_block_names = this.trackers_block_names_right.filter(i => i !== item);
         this.trackers_block_names_right = _trackers_block_names
-      }else{
+      } else {
         this.trackers_block_names_right.push(item)
       }
     }
     this.updateStepCompletionStatus(2, this.trackers_block_names.length > 0 || this.trackers_block_names_right.length > 0);
+
   }
   goToPrevStep(): void {
     if (this.currentStep > 1) {
@@ -380,7 +426,7 @@ export class InstanceComponent {
     if (this.currentStep === 1) {
       return this.stepCompletionStatus[this.currentStep - 1];
     }
-    
+
     // do here for the other steps
     return false;
   }
@@ -408,7 +454,7 @@ export class InstanceComponent {
     });
   }
 
-  
+
   toggleSwitch() {
     this.isToggleChecked = !this.isToggleChecked;
   }
