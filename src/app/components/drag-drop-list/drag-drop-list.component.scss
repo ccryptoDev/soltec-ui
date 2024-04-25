@@ -12,7 +12,15 @@
     border-radius: 10px;
     border: 1px solid #CBD2D9;
   }
-  
+  .possible-info {
+    color: #CBD2D9;
+  }
+  .possible-info.active {
+    position: absolute;
+    height: 60px;
+    width: 370px;
+    background-color: #CBD2D9;
+  }
   .tracker-list {
     border: solid 1px #CBD2D9;
     min-height: 60px;

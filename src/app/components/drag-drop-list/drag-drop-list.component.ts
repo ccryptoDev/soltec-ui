@@ -20,11 +20,13 @@ export class DragDropListComponent implements OnInit {
   @Input() data?: InstanceTrackerDrawList;
   
   @Output() onDrop = new EventEmitter<any>()
-
+  isPossibleInfoClicked: boolean = false;
   todo: TrackerInformation[] = [];
 
   done: TrackerInformation[] = [];
-
+  onPossibleInfoClicked() {
+    this.isPossibleInfoClicked = !this.isPossibleInfoClicked;
+  }
   ngOnInit(): void {
     this.done = this.data?.possible_trackers ?? [];
     this.todo = this.data?.trackers ?? []

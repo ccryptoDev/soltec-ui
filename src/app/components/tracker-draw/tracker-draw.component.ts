@@ -59,7 +59,6 @@ export class TrackerDrawComponent implements AfterViewInit, OnChanges {
 
     // Draw rectangles in the new coordinate system
     for (let itemRect in this.data) {
-      this.consoleLog(this.data[(parseInt(itemRect))])
       this.ctx.fillStyle = 'black';
       this.ctx.beginPath();
       this.ctx.moveTo(this.data[(parseInt(itemRect))]['point_SW'][0], this.data[(parseInt(itemRect))]['point_SW'][1]);
@@ -138,16 +137,13 @@ export class TrackerDrawComponent implements AfterViewInit, OnChanges {
   //   this.fabricCanvas.add(rect);
 
   zoomIn() {
-    this.scale *= 1.1;  // Increase the scale by 10%
+    this.scale *= 2;  // Increase the scale by 10%
     this.drawRectangles();  // Redraw the content with the new scale
   }
 
   zoomOut() {
-    this.scale /= 1.1;  // Decrease the scale by 10%
+    this.scale /= 2;  // Decrease the scale by 10%
     this.drawRectangles();  // Redraw the content with the new scale
   }
 
-  consoleLog(data: any) {
-    console.log("udpated data", data)
-  }
 }
