@@ -209,7 +209,8 @@
             <div *ngIf="currentStep === 2 && isStep2flag === false" class="inner"> <!-- step 2 -->
               <!-- step 2 header -->
               <div class="step-title">
-                <h4 class="font-calibri tracker-header-text font-18">Confirma los atributos de los trackers y drivers (si es que se detectan
+                <h4 class="font-calibri tracker-header-text font-18">Confirma los atributos de los trackers y drivers
+                  (si es que se detectan
                   elementos “Cardan”)</h4>
               </div>
               <!-- step 2 header -->
@@ -223,14 +224,14 @@
                     <h3 class="tracker-header h-67">Trackers</h3>
                   </div>
                   <div class="flex-center">
-                      <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check"
-                        [ngClass]="{'active' : trackers_block_names.includes(item)}">
-                        <div class="custom-checkbox">
-                          <input type="checkbox" [checked]="trackers_block_names.includes(item)"
-                            (change)="onSelectedTrackers(item, '1') ">
-                          {{ item }}
-                        </div>
+                    <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check"
+                      [ngClass]="{'active' : trackers_block_names.includes(item)}">
+                      <div class="custom-checkbox">
+                        <input type="checkbox" [checked]="trackers_block_names.includes(item)"
+                          (change)="onSelectedTrackers(item, '1') ">
+                        {{ item }}
                       </div>
+                    </div>
                   </div>
 
                 </div> <!-- /layout file uploader -->
@@ -242,45 +243,47 @@
                   </div>
                   <div class="tracker-body">
 
-                      <p *ngIf="instanceTrackers['is_cardan'] == false">No se ha encontrado ningún cardan en el
-                        layout.</p>
-                      <div *ngIf="instanceTrackers['is_cardan'] == true" class="tracker-body">
-                        <div *ngIf="isToggleChecked == false" class="flex-center">
+                    <p *ngIf="instanceTrackers['is_cardan'] == false">No se ha encontrado ningún cardan en el
+                      layout.</p>
+                    <div *ngIf="instanceTrackers['is_cardan'] == true" class="tracker-body">
+                      <div *ngIf="isToggleChecked == false" class="flex-center">
+                        <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check"
+                          [ngClass]="{'active' : trackers_block_names_right.includes(item)}">
+                          <label class="custom-checkbox">
+                            <input type="checkbox" (change)="onSelectedTrackers(item, '2')">
+                            {{ item }}
+                          </label>
+                        </div>
+                      </div>
+
+                      <div *ngIf="isToggleChecked == true" class="tracker-body-layout h-40">
+                        <div class="tracker-slave-half tracker-body-left">
                           <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check"
-                            [ngClass]="{'active' : trackers_block_names_right.includes(item)}">
-                            <label class="custom-checkbox">
-                              <input type="checkbox" (change)="onSelectedTrackers(item, '2')">
+                            [ngClass]="{ 'toggleCheck': isToggleChecked}">
+                            <label>
                               {{ item }}
                             </label>
                           </div>
                         </div>
+                        <div class="tracker-slave-half tracker-body-right">
+                          <p class="tracker-right-text">Selecciona un tag para ver sus valores.</p>
+                        </div>
+                      </div>
 
-                        <div *ngIf="isToggleChecked == true" class="tracker-body-layout h-40">
-                          <div class="tracker-slave-half tracker-body-left">
-                            <div *ngFor="let item of instanceTrackers['tracker_tags']" class="tracker-check" [ngClass]="{ 'toggleCheck': isToggleChecked}">
-                              <label>
-                                {{ item }}
-                              </label>
-                            </div>
-                          </div>
-                          <div class="tracker-slave-half tracker-body-right">
-                            <p class="tracker-right-text">Selecciona un tag para ver sus valores.</p>
+
+
+                    </div>
+                    <div class="tracker-toggle">
+                      <div (click)="toggleSwitch()">
+                        <div class="toggle-switch" [ngClass]="{ 'active': isToggleChecked}">
+                          <div class="toggle-slider" (click)="toggleSwitch()" [ngClass]="{ 'checked': isToggleChecked}">
                           </div>
                         </div>
-
-
-
+                        <p class="tracker-footer">Esclavo está en el tag 'value'.</p>
                       </div>
-                      <div class="tracker-toggle">
-                        <div (click)="toggleSwitch()" >
-                          <div  class="toggle-switch" [ngClass]="{ 'active': isToggleChecked}"> 
-                            <div class="toggle-slider" (click)="toggleSwitch()" [ngClass]="{ 'checked': isToggleChecked}"></div>
-                          </div>
-                          <p class="tracker-footer">Esclavo está en el tag 'value'.</p>
-                        </div>
 
-                      </div>
-                      
+                    </div>
+
                   </div>
 
                 </div> <!-- /typograph file uploader -->
@@ -290,14 +293,23 @@
             </div> <!-- /step 2 -->
             <div *ngIf="currentStep === 2 && isStep2flag === true" class="inner">
               <div class="confirm-form">
-              <div class="tracker-draw">
-                <app-tracker-draw>         </app-tracker-draw>
-                <!-- <canvas #myCanvas width="632" height="500" style="border:1px solid black; border-radius: 10px;"></canvas> -->
+                <div class="tracker-draw">
+                  <app-tracker-draw [data]="instanceTrackerDrawDummy.trackers" [tc1]="instanceTrackerDrawDummy.trackers_count" [tc2]="instanceTrackerDrawDummy.slaves_count" [tc3]="instanceTrackerDrawDummy.possible_trackers_count"> </app-tracker-draw>
+                  <!-- <canvas #myCanvas width="632" height="500" style="border:1px solid black; border-radius: 10px;"></canvas> -->
+                </div>
+                <div>
+                  <app-drag-drop-list [data]="instanceTrackerDrawDummy" (onDrop)="didDrop($event)" ></app-drag-drop-list>
+<!--                     
+                    <div class="tracker-header h-50 color-orange">
+                      <p class="tracker-header-text font-calibri font-18">Trackers</p>
+                    </div>
+                  </div>
+                  <div class="publish-tracker-items">
+                    <div class="tracker-header h-50">
+                      <p class="tracker-header-text font-calibri font-18">Posibles trackers</p>
+                    </div> -->
+                </div>
               </div>
-              <div class="tracker-draw-items">
-                qaaa
-              </div>
-            </div>
             </div>
           </div>
           <div class="step-actions">

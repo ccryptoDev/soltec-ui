@@ -84,6 +84,12 @@ export const instanceDummy_1 = {
   "coordinateSets": [],
   "history": []
 }
+
+// "point_SW": [64518, 4206918],
+//       "point_SE": [64520, 4206918],
+//       "point_NW": [64520, 4206951],
+//       "point_NE": [64518, 4206951]
+
 export const instanceTrackerDrawDummy = {
   "trackers_count": 2183,
   "slaves_count": 2132,
@@ -92,36 +98,36 @@ export const instanceTrackerDrawDummy = {
     {
       "tracker_id": 1,
       "name": "T03-04-001",
-      "point_SW": [64518, 4206918],
-      "point_SE": [64520, 4206918],
-      "point_NW": [64520, 4206951],
-      "point_NE": [64518, 4206951]
+      "point_SW": [10, 10],
+      "point_SE": [13, 10],
+      "point_NW": [13, 25],
+      "point_NE": [10, 25]
     },
     {
       "tracker_id": 2,
-      "name": "T03-04-001",
-      "point_SW": [64518, 4206918],
-      "point_SE": [64520, 4206918],
-      "point_NW": [64520, 4206951],
-      "point_NE": [64518, 4206951]
+      "name": "T03-04-002",
+      "point_SW": [10, 40],
+      "point_SE": [13, 40],
+      "point_NW": [13, 60],
+      "point_NE": [10, 60]
     },
     {
       "tracker_id": 3,
-      "name": "T03-04-001",
-      "point_SW": [64518, 4206918],
-      "point_SE": [64520, 4206918],
-      "point_NW": [64520, 4206951],
-      "point_NE": [64518, 4206951]
+      "name": "T03-04-003",
+      "point_SW": [30, 30],
+      "point_SE": [35, 30],
+      "point_NW": [35, 50],
+      "point_NE": [30, 50]
     }
   ],
   "possible_trackers": [
     {
       "tracker_id": 4,
-      "name": "T03-04-001",
-      "point_SW": [64518, 4206918],
-      "point_SE": [64520, 4206918],
-      "point_NW": [64520, 4206951],
-      "point_NE": [64518, 4206951]
+      "name": "T03-04-004",
+      "point_SW": [30, 70],
+      "point_SE": [35, 70],
+      "point_NW": [35, 90],
+      "point_NE": [30, 90]
     },
   ]
 

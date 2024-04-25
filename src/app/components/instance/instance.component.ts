@@ -14,6 +14,7 @@ import { instanceDummy, instanceDummy_1, instanceTrackerDummy, instanceTrackerDr
 // import {Store} from '@ngrx/store';
 // import {Store} from '@ngrx/Store'
 import { BehaviorSubject } from 'rxjs';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-instance',
@@ -45,22 +46,22 @@ export class InstanceComponent {
 
   trackers_block_names: any[] = []
   trackers_block_names_right: any[] = []
-  trackerInformation: TrackerInformation[] = [
-    {
-      "tracker_id": 0,
-      "name": "",
-      "point_SW": [],
-      "point_SE": [],
-      "point_NW": [],
-      "point_NE": []
-    }
-  ]
+  // trackerInformation: TrackerInformation[] = [
+  //   {
+  //     "tracker_id": 0,
+  //     "name": "",
+  //     "point_SW": [],
+  //     "point_SE": [],
+  //     "point_NW": [],
+  //     "point_NE": []
+  //   }
+  // ]
   instanceTrackerDrawDummy: InstanceTrackerDrawList = {
     "trackers_count": 0,
     "slaves_count": 0,
     "possible_trackers_count": 0,
-    "trackers": this.trackerInformation,
-    "possible_trackers": this.trackerInformation
+    "trackers": [],
+    "possible_trackers": []
   }
   // step2Response = new BehaviorSubject<any>({})
   // step2ResponseObservable$ = this.step2Response.asObservable()
@@ -454,6 +455,12 @@ export class InstanceComponent {
     });
   }
 
+
+  didDrop(event: any) {
+    const { todo, done } = event
+    this.instanceTrackerDrawDummy.possible_trackers = [...done]
+    this.instanceTrackerDrawDummy.trackers = [...todo]
+  }
 
   toggleSwitch() {
     this.isToggleChecked = !this.isToggleChecked;

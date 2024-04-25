@@ -38,6 +38,7 @@ import { InstanceComponent } from './components/instance/instance.component';
 import { CreateInstanceModalComponent } from './components/modals/create-instance-modal/create-instance-modal.component';
 import { SelectInstanceModalComponent } from './components/modals/select-instance-modal/select-instance-modal.component';
 import { TrackerDrawComponent } from './components/tracker-draw/tracker-draw.component';
+import { DragDropListComponent } from './components/drag-drop-list/drag-drop-list.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { TrackerDrawComponent } from './components/tracker-draw/tracker-draw.com
     MatPaginatorModule,
     SharedModule,
     TooltipModule,
+    DragDropListComponent,
   ],
   providers: [
     {
